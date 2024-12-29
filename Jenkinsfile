@@ -21,14 +21,20 @@ pipeline {
 }
 
 
-        stage('Build') {
-            steps {
-                bat """
-                set PATH="%PYTHON_PATH%;%PATH%"
-                pip install -r requirements.txt
-                """
-            }
-        }
+        // stage('Build') {
+        //     steps {
+        //         bat """
+        //         set PATH="%PYTHON_PATH%;%PATH%"
+        //         pip install -r requirements.txt
+        //         """
+        //     }
+        // }stage('Install Dependencies') {
+    steps {
+        bat '"C:\\Users\\My PC\\AppData\\Local\\Programs\\Python\\Python313\\python.exe" -m pip install -r requirements.txt'
+    }
+}
+
+        
 
         stage('SonarAnalysis') {
             environment {
