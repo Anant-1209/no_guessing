@@ -32,7 +32,7 @@ pipeline {
                -D"sonar.projectKey=guessing_game_jenkin_pipeline" 
                -D"sonar.sources=." 
                -D"sonar.host.url=http://localhost:9000" 
-               -D"sonar.token=sqp_22669b2637294d5a15d647262861d5f465b6e977"
+               -D"sonar.token=$SONAR_TOKEN"
                 """
             }
         }
