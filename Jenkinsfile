@@ -12,6 +12,14 @@ pipeline {
                 checkout scm
             }
         }
+        stage('Debug Python Installation') {
+    steps {
+        bat 'where python'
+        bat 'python --version'
+        bat 'pip --version'
+    }
+}
+
 
         stage('Build') {
             steps {
