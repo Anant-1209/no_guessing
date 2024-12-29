@@ -13,8 +13,6 @@ pipeline {
             }
         }
 
-   
-
         stage('Install Dependencies') {
             steps {
                 bat '"C:\\Users\\My PC\\AppData\\Local\\Programs\\Python\\Python313\\python.exe" -m pip install -r requirements.txt'
@@ -27,12 +25,12 @@ pipeline {
             }
             steps {
                 bat """
-                set PATH="%PYTHON_PATH%;%SONAR_SCANNER_PATH%;%PATH%"
-               sonar-scanner.bat 
-               -D"sonar.projectKey=guessing_game_jenkin_pipeline" 
-               -D"sonar.sources=." 
-               -D"sonar.host.url=http://localhost:9000" 
-               -D"sonar.token=$SONAR_TOKEN"
+                set PATH=%PYTHON_PATH%;%SONAR_SCANNER_PATH%;%PATH%
+                sonar-scanner.bat ^
+                -Dsonar.projectKey=guessing_game_jenkin_pipeline ^
+                -Dsonar.sources=. ^
+                -Dsonar.host.url=http://localhost:9000 ^
+                -Dsonar.login=%SONAR_TOKEN%
                 """
             }
         }
