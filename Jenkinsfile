@@ -24,7 +24,7 @@ pipeline {
 
         stage('SonarAnalysis') {
             environment {
-                SONAR_TOKEN = credentials('guessing_game_token') // Make sure the token is correct
+                SONAR_TOKEN = credentials('guessing_project_pipeline') // Make sure the token is correct
             }
             steps {
                 bat """
