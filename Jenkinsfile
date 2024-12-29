@@ -12,41 +12,32 @@ pipeline {
                 checkout scm
             }
         }
+
         stage('Debug Python Installation') {
-    steps {
-        bat 'where python'
-        bat 'python --version'
-        bat 'pip --version'
-    }
-}
+            steps {
+                bat 'where python'
+                bat 'python --version'
+                bat 'pip --version'
+            }
+        }
 
-
-        // stage('Build') {
-        //     steps {
-        //         bat """
-        //         set PATH="%PYTHON_PATH%;%PATH%"
-        //         pip install -r requirements.txt
-        //         """
-        //     }
-        // }stage('Install Dependencies') {
-    steps {
-        bat '"C:\\Users\\My PC\\AppData\\Local\\Programs\\Python\\Python313\\python.exe" -m pip install -r requirements.txt'
-    }
-}
-
-        
+        stage('Install Dependencies') {
+            steps {
+                bat '"C:\\Users\\My PC\\AppData\\Local\\Programs\\Python\\Python313\\python.exe" -m pip install -r requirements.txt'
+            }
+        }
 
         stage('SonarAnalysis') {
             environment {
-                SONAR_TOKEN = credentials('sqp_e83ecb56cf0592bb9d09596b44c8735477f92236') // Make sure the token is correct
+                SONAR_TOKEN = credentials('sqp_e83ecb56cf0592bb9d09596b44c8735477f92236') // Ensure the correct credentials ID
             }
             steps {
                 bat """
                 set PATH="%PYTHON_PATH%;%SONAR_SCANNER_PATH%;%PATH%"
-                sonar-scanner.bat 
-                -Dsonar.projectKey=guessing_game_jenkins_project  // Corrected the typo
-                -Dsonar.sources=. 
-                -Dsonar.host.url=http://localhost:9000 
+                sonar-scanner.bat ^
+                -Dsonar.projectKey=guessing_game_jenkins_project ^
+                -Dsonar.sources=. ^
+                -Dsonar.host.url=http://localhost:9000 ^
                 -Dsonar.login=%SONAR_TOKEN%
                 """
             }
