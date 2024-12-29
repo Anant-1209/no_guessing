@@ -16,7 +16,7 @@ pipeline {
         stage('Build') {
             steps {
                 bat """
-                set PATH=%PYTHON_PATH%;%PATH%
+                set PATH="%PYTHON_PATH%;%PATH%"
                 pip install -r requirements.txt
                 """
             }
@@ -24,16 +24,16 @@ pipeline {
 
         stage('SonarAnalysis') {
             environment {
-                SONAR_TOKEN = credentials('guessing_game_token')
+                SONAR_TOKEN = credentials('guessing_game_token') // Make sure the token is correct
             }
             steps {
                 bat """
-                set PATH=%PYTHON_PATH%;%SONAR_SCANNER_PATH%;%PATH%
+                set PATH="%PYTHON_PATH%;%SONAR_SCANNER_PATH%;%PATH%"
                 sonar-scanner.bat 
-                -D"sonar.projectKey=gussing_game_jenkins_project" 
-                -D"sonar.sources=." 
-                -D"sonar.host.url=http://localhost:9000" 
-                -D"sonar.login=%SONAR_TOKEN%"
+                -Dsonar.projectKey=guessing_game_jenkins_project  // Corrected the typo
+                -Dsonar.sources=. 
+                -Dsonar.host.url=http://localhost:9000 
+                -Dsonar.login=%SONAR_TOKEN%
                 """
             }
         }
