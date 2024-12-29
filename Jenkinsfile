@@ -13,13 +13,7 @@ pipeline {
             }
         }
 
-        stage('Debug Python Installation') {
-            steps {
-                bat 'where python'
-                bat 'python --version'
-                bat 'pip --version'
-            }
-        }
+   
 
         stage('Install Dependencies') {
             steps {
