@@ -23,16 +23,17 @@ pipeline {
         
         stage('SonarAnalysis') {
             environment {
-                SONAR_TOKEN = credentials('sqa_c78048dd75096cd8baa2e583466a98c36706cf60')
+                SONAR_TOKEN = credentials('sqp_ca23a9acaeefd1856d4542d3163c2f4d06d6b138')
             }
             steps {
                 bat '''
                 set PATH=%PYTHON_PATH%;%PATH%
                sonar-scanner.bat 
-               -D"sonar.projectKey=sonar_pipeline_jenkins" 
+               -D"sonar.projectKey=gussing_game_jenkins_project" 
                -D"sonar.sources=." 
                -D"sonar.host.url=http://localhost:9000" 
-               -D"sonar.token=sqp_8e5d48752c7e32c8336fa25995cd3e752f21b28a"
+               -D"sonar.token=sqp_ca23a9acaeefd1856d4542d3163c2f4d06d6b138"
+               
                 '''
             }
         }
