@@ -28,11 +28,11 @@ pipeline {
             steps {
                 bat """
                 set PATH="%PYTHON_PATH%;%SONAR_SCANNER_PATH%;%PATH%"
-                sonar-scanner.bat ^
-                -Dsonar.projectKey=guessing_game_jenkins_project ^
-                -Dsonar.sources=. ^
-                -Dsonar.host.url=http://localhost:9000 ^
-                -Dsonar.login=%SONAR_TOKEN%
+               sonar-scanner.bat 
+               -D"sonar.projectKey=guessing_game_jenkin_pipeline" 
+               -D"sonar.sources=." 
+               -D"sonar.host.url=http://localhost:9000" 
+               -D"sonar.token=sqp_22669b2637294d5a15d647262861d5f465b6e977"
                 """
             }
         }
